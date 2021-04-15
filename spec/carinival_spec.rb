@@ -102,8 +102,8 @@ RSpec.describe Carnival do
             @johnny.add_interest('Bumper Cars')
             @jeffco_fair.admit(@bob)
             @jeffco_fair.admit(@johnny)
-            expect(@jeffco_fair.ticket_lottery_winner(@bumper_cars).count).to eq(1)
-            expect(@jeffco_fair.ticket_lottery_winner(@bumper_cars).count).to be_in([@bob, @johnny])
+            expect(@jeffco_fair.ticket_lottery_winner(@bumper_cars)).to be_instance_of(Attendee)
+            expect(@jeffco_fair.ticket_lottery_winner(@bumper_cars)).to eq(@bob).or(eq(@johnny))
         end
     end
 end

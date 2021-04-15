@@ -41,4 +41,8 @@ class Carnival
     def ticket_lottery_contestants(ride)
         attendees_interested_in_ride(ride)
     end
+
+    def ticket_lottery_winner(ride)
+        ticket_lottery_contestants(ride).sample
+    end
 end
