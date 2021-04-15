@@ -11,6 +11,7 @@ RSpec.describe Carnival do
         @scrambler = Ride.new({name: 'Scrambler', cost: 15})
         @bob = Attendee.new('Bob', 20)
         @sally = Attendee.new('Sally', 20)
+        @johnny = Attendee.new("Johnny", 5)
     end
 
     describe '#initialize' do
@@ -40,6 +41,21 @@ RSpec.describe Carnival do
             @sally.add_interest('Scrambler')
             expect(@jeffco_fair.recommend_rides(@bob)).to eq([@ferris_wheel, @bumper_cars])
             expect(@jeffco_fair.recommend_rides(@sally)).to eq([@scrambler])
+        end
+    end
+    describe '#admit' do
+        it 'allows you to admit attendees to the park' do
+            @jeffco_fair.add_ride(@ferris_wheel)
+            @jeffco_fair.add_ride(@bumper_cars)
+            @jeffco_fair.add_ride(@scrambler)
+            @bob.add_interest('Ferris Wheel')
+            @bob.add_interest('Bumper Cars')
+            @sally.add_interest('Scrambler')
+            @johnny.add_interest('Bumper Cars')
+            @jeffco_fair.admit(@bob)
+            @jeffco_fair.admit(@sally)
+            @jeffco_fair.admit(@johnny)
+            expect(@jeffco_fair.attendees).to eq([@bob, @sally, @johnny])
         end
     end
 end
