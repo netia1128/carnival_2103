@@ -42,7 +42,15 @@ class Carnival
         attendees_interested_in_ride(ride)
     end
 
-    def ticket_lottery_winner(ride)
+    def draw_lottery_winner(ride)
         ticket_lottery_contestants(ride).sample
+    end
+
+    def announce_lottery_winner(ride)
+        if draw_lottery_winner(ride).nil?
+            "No winners for this lottery"
+        else
+            "#{draw_lottery_winner(ride)} has won the #{ride.name} ticket."
+        end
     end
 end

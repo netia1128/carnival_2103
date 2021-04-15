@@ -95,15 +95,31 @@ RSpec.describe Carnival do
             expect(@jeffco_fair.ticket_lottery_contestants(@bumper_cars)).to eq([@bob, @johnny])
         end
     end
-    describe '#ticket_lottery_winner' do
+    describe '#draw_lottery_winner' do
         it 'picks a random winner from lottery contestants for a free ride ticket' do
             @jeffco_fair.add_ride(@bumper_cars)
             @bob.add_interest('Bumper Cars')
             @johnny.add_interest('Bumper Cars')
             @jeffco_fair.admit(@bob)
             @jeffco_fair.admit(@johnny)
-            expect(@jeffco_fair.ticket_lottery_winner(@bumper_cars)).to be_instance_of(Attendee)
-            expect(@jeffco_fair.ticket_lottery_winner(@bumper_cars)).to eq(@bob).or(eq(@johnny))
+            expect(@jeffco_fair.draw_lottery_winner(@bumper_cars)).to be_instance_of(Attendee)
+            expect(@jeffco_fair.draw_lottery_winner(@bumper_cars)).to eq(@bob).or(eq(@johnny))
+        end
+    end    
+    describe '#announce_lottery_winner' do
+        it 'announces the lottery winner' do
+            @jeffco_fair.add_ride(@bumper_cars)
+            @bob.add_interest('Bumper Cars')
+            @johnny.add_interest('Bumper Cars')
+            @jeffco_fair.admit(@bob)
+            @jeffco_fair.admit(@johnny)
+            ##struggling with my stub - will return to this later if I have finished Iteration 4
+            # stub = double('attendee')
+            # allow(stub).to receive(:name) {'Bob'}
+
+            # require 'pry'; binding.pry
+            # expect(expect(@jeffco_fair.stub(:response).and_return("Bob has won the IMAX exhibit")
+            expect(@jeffco_fair.announce_lottery_winner(@ferris_wheel)).to eq("No winners for this lottery")
         end
     end
 end
