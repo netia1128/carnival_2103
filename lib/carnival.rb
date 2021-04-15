@@ -4,12 +4,14 @@ require_relative 'ride'
 class Carnival
     attr_reader :name,
                 :rides,
-                :attendees
+                :attendees,
+                :revenue
 
     def initialize(name)
         @name = name
         @rides = []
         @attendees = []
+        @revenue = 0
     end
 
     def add_ride(ride)
@@ -52,5 +54,9 @@ class Carnival
         else
             "#{draw_lottery_winner(ride)} has won the #{ride.name} ticket."
         end
+    end
+
+    def attendees_of_rides
+        {}
     end
 end
