@@ -5,13 +5,15 @@ class Carnival
     attr_reader :name,
                 :rides,
                 :attendees,
-                :revenue
+                :revenue,
+                :attendees_of_rides
 
     def initialize(name)
         @name = name
         @rides = []
         @attendees = []
         @revenue = 0
+        attendees_of_rides = {}
     end
 
     def add_ride(ride)
@@ -26,6 +28,29 @@ class Carnival
 
     def admit(attendee)
         @attendees << attendee
+        take_rides(attendee)
+    end
+
+    def take_rides(attendee)
+        rides_interested_in = []
+        require 'pry'; binding.pry
+                attendee.interests.each do |interest|
+            if attendee.interest == rides.each do |ride|
+                ride.name
+            end
+                rides_interested_in << ride
+            end
+        end
+
+        #not going to finish, but here is what I would have done
+            # iterate through attendees interests and within that iteration, iterate through carnival rides
+            # make an array of all ride objects that match an attendee interest
+            # sort ride objects by price
+            # iterate through sorted ride objects and see if attendee spending money >= ride price
+            # if so, the attendee will take that ride
+            #     this means the ride gets pushed into the attendees of ride hash as a key
+            #     the attendees spending money is decreased by the cost of the ride (method update_attendee_spending_money)
+            #     the carnival revenue increases by the cost of the ride (method update_revenue)
     end
 
     def attendees_by_ride_interest
@@ -54,9 +79,5 @@ class Carnival
         else
             "#{draw_lottery_winner(ride)} has won the #{ride.name} ticket."
         end
-    end
-
-    def attendees_of_rides
-        {}
     end
 end
