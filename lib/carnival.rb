@@ -1,3 +1,6 @@
+require_relative 'attendee'
+require_relative 'ride'
+
 class Carnival
     attr_reader :name,
                 :rides
@@ -9,5 +12,11 @@ class Carnival
 
     def add_ride(ride)
         @rides << ride
+    end
+
+    def recommend_rides(attendee)
+        @rides.find_all do |ride|
+            attendee.interests.include?(ride.name)
+        end
     end
 end

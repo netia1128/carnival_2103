@@ -32,9 +32,12 @@ RSpec.describe Carnival do
     end
     describe '#recommend_rides' do
         it 'recommends rides to specific attendees' do
-            @bob.add_interest('Ferrise Wheel')
+            @jeffco_fair.add_ride(@ferris_wheel)
+            @jeffco_fair.add_ride(@bumper_cars)
+            @jeffco_fair.add_ride(@scrambler)
+            @bob.add_interest('Ferris Wheel')
             @bob.add_interest('Bumper Cars')
-            @sally.add_interest('Scambler')
+            @sally.add_interest('Scrambler')
             expect(@jeffco_fair.recommend_rides(@bob)).to eq([@ferris_wheel, @bumper_cars])
             expect(@jeffco_fair.recommend_rides(@sally)).to eq([@scrambler])
         end
