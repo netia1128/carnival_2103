@@ -145,9 +145,15 @@ RSpec.describe Carnival do
             tj.add_interest('Bumper Cars')
             @jeffco_fair.admit(tj)
             expect(@jeffco_fair.attendees_of_rides).to eq({})
-            # require 'pry'; binding.pry
             expect(@jeffco_fair.revenue).to eq(0)
             expect(tj.spending_money).to eq (7)
+            bob = Attendee.new('Bob', 10)
+            bob.add_interest('Bumper Cars')
+            bob.add_interest('Scrambler')
+            @jeffco_fair.admit(bob)
+            expect(@jeffco_fair.attendees_of_rides).to eq({bumper_cars => bob})
+            expect(@jeffco_fair.revenue).to eq(10)
+            expect(bob.spending_money).to eq(0)
         end
     end
 end
