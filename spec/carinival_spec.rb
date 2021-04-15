@@ -75,4 +75,14 @@ RSpec.describe Carnival do
                                                                    @scrambler => [@sally]})
         end
     end
+    describe '#attendees_interested_in_ride' do
+        it 'tells you which attendees are interested in a given ride' do
+            @jeffco_fair.add_ride(@bumper_cars)
+            @bob.add_interest('Bumper Cars')
+            @johnny.add_interest('Bumper Cars')
+            @jeffco_fair.admit(@bob)
+            @jeffco_fair.admit(@johnny)
+            expect(@jeffco_fair.attendees_interested_in_ride(@bumper_cars)).to eq([@bob, @johnny])
+        end
+    end
 end
